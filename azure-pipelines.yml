@@ -116,7 +116,7 @@ jobs:
       echo.
       echo 🎓 Educational Project Features:
       echo    - Observer Design Pattern demonstration
-      echo    - Comprehensive JUnit 5 test suite (16 tests)
+      echo    - Comprehensive JUnit 5 test suite
       echo    - Professional Maven project structure
       echo    - Code quality enforcement with Checkstyle
       echo.
