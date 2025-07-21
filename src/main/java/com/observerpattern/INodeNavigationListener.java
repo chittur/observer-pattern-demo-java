@@ -1,16 +1,15 @@
 /**
- * ********************************************************************************
- * Filename    = INodeNavigationListener.java
+ * Interface for observers that receive notifications when nodes are visited during navigation.
  * <p>
- * Author      = Ramaswamy Krishnan-Chittur
- * <p>
- * Product     = Observer Pattern Demo - Java
- * <p>
- * Project     = Observer Pattern Demo
- * <p>
- * Description = Contract for a listener that is notified when a node is visited.
- *               This interface represents the Observer in the Observer design pattern.
- * ********************************************************************************
+ * This interface defines the contract for observers in the Observer design pattern.
+ * Any class that implements this interface can be notified when the NodeNavigator
+ * visits a node during navigation, enabling loose coupling between the subject
+ * and its observers.
+ * </p>
+ * 
+ * @author Ramaswamy Krishnan-Chittur
+ * @version 1.0.0
+ * @since 1.0.0
  */
 
 package com.observerpattern;

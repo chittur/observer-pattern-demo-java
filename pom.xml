@@ -139,7 +139,6 @@
                     <violationSeverity>warning</violationSeverity>
                     <skip>${checkstyle.skip}</skip>
                 </configuration>
-                <!-- Temporarily disabled for testing
                 <executions>
                     <execution>
                         <id>validate</id>
@@ -149,7 +148,6 @@
                         </goals>
                     </execution>
                 </executions>
-                -->
             </plugin>
 
             <!-- Maven Site Plugin for reporting -->

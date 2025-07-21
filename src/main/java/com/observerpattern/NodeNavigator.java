@@ -1,16 +1,15 @@
 /**
- * ********************************************************************************
- * Filename    = NodeNavigator.java
+ * Subject class that navigates a linked list and notifies observers of visited nodes.
  * <p>
- * Author      = Ramaswamy Krishnan-Chittur
- * <p>
- * Product     = Observer Pattern Demo - Java
- * <p>
- * Project     = Observer Pattern Demo
- * <p>
- * Description = Navigates a linked list and notifies a listener when a node is visited.
- *               This class represents the Subject in the Observer design pattern.
- * ********************************************************************************
+ * This class demonstrates the Subject role in the Observer design pattern.
+ * It maintains a linked list of integers and allows observers to subscribe
+ * for notifications when nodes are visited during navigation, providing
+ * a practical example of loose coupling between subjects and observers.
+ * </p>
+ * 
+ * @author Ramaswamy Krishnan-Chittur
+ * @version 1.0.0
+ * @since 1.0.0
  */
 
 package com.observerpattern;

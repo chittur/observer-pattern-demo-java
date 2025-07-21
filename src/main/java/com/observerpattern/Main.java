@@ -1,16 +1,15 @@
 /**
- * ********************************************************************************
- * Filename    = Main.java
+ * Main demonstration class showcasing the Observer design pattern implementation.
  * <p>
- * Author      = Ramaswamy Krishnan-Chittur
- * <p>
- * Product     = Observer Pattern Demo - Java
- * <p>
- * Project     = Observer Pattern Demo
- * <p>
- * Description = Main class demonstrating the Observer design pattern implementation.
- *               Shows how to use NodeNavigator and listeners in a practical example.
- * ********************************************************************************
+ * This class provides executable examples of how the Observer pattern works
+ * using the NodeNavigator and INodeNavigationListener implementations.
+ * It demonstrates various scenarios including single observers, multiple
+ * observer types, empty list handling, unsubscription behavior, and error handling.
+ * </p>
+ * 
+ * @author Ramaswamy Krishnan-Chittur
+ * @version 1.0.0
+ * @since 1.0.0
  */
 
 package com.observerpattern;
@@ -221,17 +220,22 @@ public final class Main {
      * Simple logging listener that records visited nodes.
      */
     private static class SimpleLoggingListener implements INodeNavigationListener {
+        /** The name of this listener for display purposes. */
         private final String name;
+        
+        /** List of nodes that have been visited. */
         private final List<Integer> visitedNodes;
+        
+        /** Count of notifications received. */
         private int notificationCount;
         
         /**
          * Creates a new logging listener with the specified name.
          * 
-         * @param name the name of this listener
+         * @param listenerName the name of this listener
          */
-        public SimpleLoggingListener(final String name) {
-            this.name = name;
+        SimpleLoggingListener(final String listenerName) {
+            this.name = listenerName;
             this.visitedNodes = new ArrayList<>();
             this.notificationCount = 0;
         }
@@ -266,12 +270,13 @@ public final class Main {
      * Calculator listener that computes the sum of visited nodes.
      */
     private static class SumCalculatorListener implements INodeNavigationListener {
+        /** Running sum of all visited node values. */
         private int sum;
         
         /**
          * Creates a new sum calculator listener.
          */
-        public SumCalculatorListener() {
+        SumCalculatorListener() {
             this.sum = 0;
         }
         
@@ -295,15 +300,22 @@ public final class Main {
      * Statistics listener that collects statistical information about visited nodes.
      */
     private static class StatisticsListener implements INodeNavigationListener {
+        /** Count of nodes visited. */
         private int count;
+        
+        /** Sum of all node values. */
         private int sum;
+        
+        /** Minimum value encountered. */
         private int min = Integer.MAX_VALUE;
+        
+        /** Maximum value encountered. */
         private int max = Integer.MIN_VALUE;
         
         /**
          * Creates a new statistics listener.
          */
-        public StatisticsListener() {
+        StatisticsListener() {
             this.count = 0;
             this.sum = 0;
         }

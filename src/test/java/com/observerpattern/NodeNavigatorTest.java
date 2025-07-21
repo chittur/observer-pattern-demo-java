@@ -1,16 +1,15 @@
 /**
- * ********************************************************************************
- * Filename    = NodeNavigatorTest.java
+ * Comprehensive unit tests for the Observer pattern demonstration.
+ * <p>
+ * This test class validates the behavior of the NodeNavigator and its interaction
+ * with observers. It covers normal operation, edge cases, error conditions, and
+ * the proper implementation of the Observer design pattern using modern JUnit 5
+ * testing practices including nested test classes and parameterized tests.
+ * </p>
  * 
- * Author      = Ramaswamy Krishnan-Chittur
- * 
- * Product     = Observer Pattern Demo - Java
- * 
- * Project     = Observer Pattern Demo Tests
- * 
- * Description = Comprehensive unit tests for the Observer pattern demo.
- *               Tests NodeNavigator functionality and observer pattern behavior.
- * ********************************************************************************
+ * @author Ramaswamy Krishnan-Chittur
+ * @version 1.0.0
+ * @since 1.0.0
  */
 
 package com.observerpattern;
@@ -27,7 +26,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Comprehensive unit tests for the Observer pattern demo.
@@ -44,6 +50,25 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("NodeNavigator Tests")
 class NodeNavigatorTest {
     
+    /** Test value for single element navigation tests. */
+    private static final int SINGLE_TEST_VALUE = 42;
+    
+    /** Expected notification count for multiple navigation test. */
+    private static final int EXPECTED_MULTIPLE_NAVIGATION_COUNT = 6;
+    
+    /** Small array size for performance tests. */
+    private static final int SMALL_ARRAY_SIZE = 100;
+    
+    /** Medium array size for performance tests. */
+    private static final int MEDIUM_ARRAY_SIZE = 1000;
+    
+    /** Large array size for performance tests. */
+    private static final int LARGE_ARRAY_SIZE = 10000;
+    
+    /** Maximum allowed time for performance tests in milliseconds. */
+    private static final long MAX_PERFORMANCE_TIME_MS = 1000;
+    
+    /** Test listener instance used across test methods. */
     private TestNodeListener testListener;
     
     /**
@@ -115,7 +140,7 @@ class NodeNavigatorTest {
         @DisplayName("Should handle single element navigation correctly")
         void testSingleElementNavigation() {
             // Arrange
-            final int[] singleNumber = {42};
+            final int[] singleNumber = {SINGLE_TEST_VALUE};
             final NodeNavigator navigator = new NodeNavigator(singleNumber);
             
             // Act
@@ -125,7 +150,7 @@ class NodeNavigatorTest {
             // Assert
             assertEquals(1, testListener.getVisitedNodes().size(),
                        "Should visit exactly one node");
-            assertEquals(42, testListener.getVisitedNodes().get(0),
+            assertEquals(SINGLE_TEST_VALUE, testListener.getVisitedNodes().get(0),
                        "Should visit the correct node value");
         }
     }
@@ -268,9 +293,11 @@ class NodeNavigatorTest {
         
         /**
          * Tests navigation with large arrays.
+         * 
+         * @param size the size of the array to test
          */
         @ParameterizedTest
-        @ValueSource(ints = {100, 1000, 10000})
+        @ValueSource(ints = {SMALL_ARRAY_SIZE, MEDIUM_ARRAY_SIZE, LARGE_ARRAY_SIZE})
         @DisplayName("Should handle large arrays efficiently")
         void testLargeArrayNavigation(final int size) {
             // Arrange
@@ -289,7 +316,7 @@ class NodeNavigatorTest {
             // Assert
             assertEquals(size, testListener.getNotificationCount(),
                        "Should notify for all elements in large array");
-            assertTrue((endTime - startTime) < 1000,
+            assertTrue((endTime - startTime) < MAX_PERFORMANCE_TIME_MS,
                      "Navigation should complete within reasonable time");
         }
         
@@ -376,7 +403,7 @@ class NodeNavigatorTest {
             navigator.navigate();
             
             // Assert
-            assertEquals(6, testListener.getNotificationCount(),
+            assertEquals(EXPECTED_MULTIPLE_NAVIGATION_COUNT, testListener.getNotificationCount(),
                        "Should receive notifications for each navigation call");
             
             // Verify the pattern of notifications
@@ -391,13 +418,16 @@ class NodeNavigatorTest {
      * Test helper class that implements INodeNavigationListener for testing purposes.
      */
     private static class TestNodeListener implements INodeNavigationListener {
+        /** List of nodes that have been visited. */
         private final List<Integer> visitedNodes;
+        
+        /** Count of notifications received. */
         private int notificationCount;
         
         /**
          * Creates a new test listener.
          */
-        public TestNodeListener() {
+        TestNodeListener() {
             this.visitedNodes = new ArrayList<>();
             this.notificationCount = 0;
         }
